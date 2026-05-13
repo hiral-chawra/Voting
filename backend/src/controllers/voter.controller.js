@@ -12,7 +12,7 @@ exports.castVote = async (req, res) => {
   try {
 
     const voterId = req.user.id;  //----- Assuming user ID is available in req.user -----//
-    const { candidateId, electionId } = req.body;
+    const { candidateId, electionId, txHash } = req.body;
 
     if (!candidateId || !electionId) {
       await t.rollback();
@@ -20,13 +20,14 @@ exports.castVote = async (req, res) => {
     }
 
     const election = await Election.findByPk(electionId);
-    
+
     console.log("Incoming electionId:", electionId);
     console.log("Election found:", election);
 
-    if (!election || election.status !== "live") {
+    const now = new Date();
+    if (!election || now < election.startTime || now > election.endTime) {
       await t.rollback();
-      return res.status(400).json({ error: "Election not active" });
+      return res.status(400).json({ error: "Election is not within the active time window" });
     }
 
     const existingVote = await Vote.findOne({
@@ -47,13 +48,9 @@ exports.castVote = async (req, res) => {
       return res.status(400).json({ error: "Invalid candidate" });
     }
 
-    const voteHash = crypto
-      .createHash("sha256")
-      .update(`${voterId}-${candidateId}-${electionId}-${Date.now()}`)
-      .digest("hex");
-
     await Vote.create(
-      { voterId, candidateId, electionId, voteHash },
+      // Save the real txHash into your database's voteHash column!
+      { voterId, candidateId, electionId, voteHash: txHash },
       { transaction: t }
     );
 

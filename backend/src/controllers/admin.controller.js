@@ -45,29 +45,9 @@ exports.getSummary = async (req, res) => {
     }
 };
 
-// START election
-exports.startElection = async (req, res) => {
-    await Election.update(
-        { status: 'live' },
-        { where: {} }
-    );
-
-    res.json({ message: "Election started" });
-};
-
-//STOP election
-exports.stopElection = async (req, res) => {
-    await Election.update(
-        { status: 'completed' },
-        { where: {} }
-    );
-
-    res.json({ message: "Election stopped" });
-};
-
-// =============================
+/* =============================
 // GET ELECTION STATUS
-// =============================
+
 exports.getElectionStatus = async (req, res) => {
     try {
         const election = await Election.findOne({
@@ -82,6 +62,37 @@ exports.getElectionStatus = async (req, res) => {
             status: election.status
         });
 
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+ ============================ */
+
+ 
+// =============================
+// GET DYNAMIC ELECTION STATUS
+// =============================
+exports.getElectionStatus = async (req, res) => {
+    try {
+        const election = await Election.findOne({
+            order: [['createdAt', 'DESC']]
+        });
+
+        if (!election) {
+            return res.json({ status: "none" });
+        }
+
+        const now = new Date();
+        let currentStatus = "upcoming";
+
+        // Compare current server time against the database timestamps
+        if (now >= election.startTime && now <= election.endTime) {
+            currentStatus = "live";
+        } else if (now > election.endTime) {
+            currentStatus = "completed";
+        }
+
+        return res.json({ status: currentStatus });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
