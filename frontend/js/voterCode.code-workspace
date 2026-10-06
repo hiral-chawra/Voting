@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"name": "voterCode",
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"chat.tools.terminal.autoApprove": {
+			"/^node src/server\\.js$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/^node src/scripts/seed\\.js$/": {
+				"approve": true,
+				"matchCommandLine": true
+			}
+		},
+		"liveServer.settings.multiRootWorkspaceName": "voterCode",
+		"liveServer.settings.port": 5502
+	}
+}

@@ -1,0 +1,21 @@
+<!-- AI Chatbot Widget -->
+<div id="chatToggle" onclick="toggleChat()">🤖</div>
+
+<div id="chatWindow" style="display:none;">
+  <div id="chatHeader">
+    Hi! 👋<br>
+    <small>AI Voting Assistant</small>
+  </div>
+  <div id="chatMessages">
+    <div class="ai-msg">
+      Hi 👋 I'm your AI Voting Assistant.<br>
+      Ask me anything about voting!
+    </div>
+  </div>
+  <div id="chatInputArea">
+    <input id="chatInput" placeholder="Ask something..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script src="./js/ai.js"></script>

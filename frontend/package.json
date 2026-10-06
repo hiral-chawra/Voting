@@ -1,0 +1,21 @@
+{
+    "name": "blockchain-evoting-frontend",
+    "version": "0.1.0",
+    "description": "Static HTML frontend for blockchain-evoting hackathon MVP",
+    "main": "index.html",
+    "scripts": {
+        "dev": "npx http-server . -p 3000 -c-1",
+        "build": "echo 'No build step for static HTML'",
+        "start": "npx http-server . -p 3000"
+    },
+    "keywords": [
+        "voting",
+        "blockchain",
+        "hackathon"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    }
+}

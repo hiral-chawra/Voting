@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Verify Identity</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <h2><img id="app-icon" src="/img/app-icon.jpg" alt="App img">Digital Voting System of India</h2>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#" onclick="goToVoting()">Vote</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="results.html">Results</a>
+            <a href="admin-login.html" id="adminLink">Admin</a>
+        </div>
+        <div class="nav-info">
+            <span id="navStatus"></span>
+            <span id="navUser"></span>
+            <button id="logoutBtn" style="display:none;" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <p id="selectedLanguageDisplay" style="font-size:0.9rem; color:#6B7280;"></p>
+        <h2>Voter Identity Verification</h2>
+        <input type="text" id="voterId" placeholder="Enter Voter ID"><br><br>
+        <input type="password" id="voterPassword" placeholder="Enter Password"><br><br>
+        <button onclick="verifyVoter()">Verify</button>
+    </div>
+
+    <script src="./js/verify.js"></script>
+    <script src="./js/navbar.js"></script>
+</body>
+
+</html>
