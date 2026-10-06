@@ -40,9 +40,25 @@
   <script src="./js/navbar.js"></script>
 
   <!-- AI Chatbot Widget -->
-  <iframe src="chat-snippet.html" id="chat-widget" title="AI Chatbot Widget"
-    style="border: none; width: 350px; height: 500px; position: fixed; bottom: 20px; right: 20px;">
-  </iframe>
+  <div id="chatToggle" onclick="toggleChat()">🤖</div>
+
+  <div id="chatWindow" style="display:none;">
+    <div id="chatHeader">
+      Hi! 👋<br>
+      <small>AI Voting Assistant</small>
+    </div>
+    <div id="chatMessages">
+      <div class="ai-msg">
+        Hi 👋 I'm your AI Voting Assistant.<br>
+        Ask me anything about voting!
+      </div>
+    </div>
+    <div id="chatInputArea">
+      <input id="chatInput" placeholder="Ask something..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  <script src="./js/ai.js"></script>
 
 </body>
 
